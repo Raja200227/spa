@@ -1,0 +1,23 @@
+{
+  "name": "flora-spa",
+  "version": "1.0.0",
+  "description": "Flora Spa - Luxury Wellness & Relaxation Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "echo 'Static site - no server needed'",
+    "deploy": "echo 'Deploy to Render: Connect GitHub repository to Render Static Site'"
+  },
+  "keywords": [
+    "spa",
+    "wellness",
+    "massage",
+    "beauty"
+  ],
+  "author": "Flora Spa",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/flora-spa-website.git"
+  }
+}
+

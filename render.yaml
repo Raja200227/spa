@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: flora-spa
+    env: static
+    buildCommand: echo "No build needed for static site"
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-XSS-Protection
+        value: 1; mode=block
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
+
