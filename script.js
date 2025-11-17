@@ -131,9 +131,29 @@ function scrollToBooking() {
     }
 }
 
-// WhatsApp Integration Functions
-// Replace this phone number with your actual WhatsApp business number
-const WHATSAPP_NUMBER = '919989754001'; // Format: country code + number (no + or spaces)
+// Contact Numbers
+const CALL_NUMBER = '+917829977969';
+const WHATSAPP_NUMBER = '919187079284'; // Format: country code + number (no + or spaces)
+
+function openWhatsAppWithText(rawMessage = '') {
+    const encoded = rawMessage ? encodeURIComponent(rawMessage) : '';
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let url = '';
+    if (isMobile) {
+        url = encoded
+            ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`
+            : `https://wa.me/${WHATSAPP_NUMBER}`;
+    } else {
+        const textParam = encoded ? `&text=${encoded}` : '';
+        url = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}${textParam}`;
+    }
+
+    const win = window.open(url, '_blank');
+    if (!win) {
+        window.location.href = url;
+    }
+}
 
 // Function to open WhatsApp with pre-filled message
 function openWhatsApp(serviceName = '') {
@@ -145,9 +165,7 @@ function openWhatsApp(serviceName = '') {
         message = 'Hello! I would like to book an appointment. Please let me know about availability.';
     }
     
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-    window.open(whatsappURL, '_blank');
+    openWhatsAppWithText(message);
 }
 
 // Store booking data temporarily for confirmation
@@ -166,7 +184,7 @@ function sendBookingToWhatsApp(bookingData) {
     } = bookingData;
 
     // Format the booking message
-    let bookingMessage = `*🌸 New Appointment Booking Request - Flora Spa 🌸*\n\n`;
+    let bookingMessage = `*New Appointment Booking Request - Flora Thai Spa*\n\n`;
     bookingMessage += `*👤 Name:* ${name}\n`;
     bookingMessage += `*📱 Phone:* ${phone}\n`;
     
@@ -182,14 +200,10 @@ function sendBookingToWhatsApp(bookingData) {
         bookingMessage += `*📝 Additional Notes:* ${message}\n`;
     }
     
-    bookingMessage += `\n✅ Please confirm this appointment slot. Thank you! 🙏`;
+    bookingMessage += `\nPlease confirm this appointment slot. Thank you!`;
 
     // Encode the message for URL
-    const encodedMessage = encodeURIComponent(bookingMessage);
-    const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-    
-    // Open WhatsApp in a new tab
-    window.open(whatsappURL, '_blank');
+    openWhatsAppWithText(bookingMessage);
     
     return true;
 }
@@ -336,8 +350,7 @@ if (dateInput) {
 
 // Call Now Functionality
 function callNow() {
-    const phoneNumber = '+919989754001'; // Replace with your actual phone number
-    window.location.href = `tel:${phoneNumber}`;
+    window.location.href = `tel:${CALL_NUMBER}`;
 }
 
 // Update phone numbers in the code
@@ -346,13 +359,17 @@ function updateContactInfo() {
     // Update phone number in floating buttons
     const callBtn = document.querySelector('.call-btn');
     if (callBtn) {
-        callBtn.href = `tel:${WHATSAPP_NUMBER}`;
+        callBtn.href = `tel:${CALL_NUMBER}`;
     }
 
     // Update WhatsApp button
     const whatsappBtn = document.querySelector('.whatsapp-btn');
     if (whatsappBtn) {
         whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+        whatsappBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            openWhatsApp();
+        });
     }
 }
 
