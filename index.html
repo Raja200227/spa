@@ -1,506 +1,461 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora Thai Spa - Luxury Wellness & Relaxation</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <img src="./assets/images/flora-thai-spa-logo.png" alt="Flora Thai Spa logo" class="logo-image">
-                    <div class="logo-text">
-                        <span class="logo-title">Flora Thai Spa</span>
-                        <span class="logo-subtitle">Luxury Thai Wellness</span>
-                    </div>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                <button class="book-btn-nav" onclick="scrollToBooking()">BOOK NOW</button>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-        </div>
-    </nav>
+// Hero Video Handling
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo) {
+    console.log('Video element found, initializing...');
+    
+    // Log video source attempts
+    heroVideo.addEventListener('loadstart', function() {
+        console.log('Video loading started');
+    });
+    
+    // Ensure video plays on load
+    heroVideo.addEventListener('loadeddata', function() {
+        console.log('Video data loaded, attempting to play...');
+        this.play().catch(function(error) {
+            console.error('Video autoplay prevented:', error);
+            // Show user a message if autoplay is blocked
+            console.log('Tip: Some browsers require user interaction to play video');
+        });
+    });
+    
+    // Handle video can play
+    heroVideo.addEventListener('canplay', function() {
+        console.log('Video can play, attempting to start...');
+        this.play().catch(function(error) {
+            console.error('Video play error:', error);
+        });
+    });
+    
+    // Video successfully started playing
+    heroVideo.addEventListener('playing', function() {
+        console.log('Video is now playing!');
+    });
+    
+    // Fallback: if video fails to load
+    heroVideo.addEventListener('error', function(e) {
+        console.error('Video failed to load:', e);
+        console.error('Error details:', this.error);
+        console.log('Make sure the video file exists in the project folder');
+        console.log('Expected file: Flora_Spa_Promotional_Video_Creation.mp4');
+        // Don't hide video, let fallback sources try
+    });
+    
+    // Try to play video immediately (required for some browsers)
+    setTimeout(function() {
+        heroVideo.play().catch(function(error) {
+            console.log('Initial play attempt failed:', error);
+            console.log('This is normal - video will play when ready');
+        });
+    }, 100);
+    
+    // Pause video when page is not visible (save resources)
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            heroVideo.pause();
+        } else {
+            heroVideo.play().catch(function(error) {
+                console.log('Video autoplay prevented on visibility change:', error);
+            });
+        }
+    });
+    
+    // Additional attempt after page fully loads
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            heroVideo.play().catch(function(error) {
+                console.log('Post-load play attempt:', error);
+            });
+        }, 500);
+    });
+}
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80">
-            <!-- Spa Massage Video - Place your video file in the same folder as index.html -->
-            <!-- Try different possible file locations and names -->
-            <source src="Flora_Spa_Promotional_Video_Creation.mp4" type="video/mp4">
-            <source src="./Flora_Spa_Promotional_Video_Creation.mp4" type="video/mp4">
-            <source src="videos/Flora_Spa_Promotional_Video_Creation.mp4" type="video/mp4">
-            <source src="./videos/Flora_Spa_Promotional_Video_Creation.mp4" type="video/mp4">
-            <!-- Fallback: Use online video if local file doesn't exist -->
-            <source src="https://videos.pexels.com/video-files/3044083/3044083-hd_1920_1080_30fps.mp4" type="video/mp4">
-            <!-- Your browser does not support the video tag -->
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <p class="hero-subtitle">WELCOME TO FLORA THAI SPA</p>
-            <h1 class="hero-title">Authentic Thai Wellness Retreat</h1>
-            <p class="hero-description">Step inside Flora Thai Spa and unwind in our beautifully curated interiors, featuring private suites, jacuzzi rooms, and tranquil therapy zones inspired by Thai luxury.</p>
-            <button class="cta-button" onclick="scrollToBooking()">BOOK APPOINTMENT</button>
-        </div>
-    </section>
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('.nav-menu');
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-subtitle">EXPERTISE AREAS</p>
-                <h2 class="section-title">Discover the epitome of relaxation and rejuvenation at Flora Thai Spa</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <h3>BODY TREATMENTS</h3>
-                    <p>Enhance skin health and radiance with cleansing, exfoliating, and nourishing procedures.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-water"></i>
-                    </div>
-                    <h3>RELAXATION SPA</h3>
-                    <p>Escape to a tranquil sanctuary offering a range of rejuvenating treatments.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-hands"></i>
-                    </div>
-                    <h3>RELAXING MASSAGE</h3>
-                    <p>Unwind with a relaxing massage. Our therapists will melt away your stress and tension.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    });
+}
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Premium Services</h2>
-                <p class="section-description">Experience luxury and relaxation with our expertly crafted treatments</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Swedish Massage" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-spa"></i>
-                        </div>
-                    </div>
-                    <h3>Swedish Massage</h3>
-                    <p>Gentle, flowing strokes to relax muscles and improve circulation.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Swedish Massage')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hot Stone Therapy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-fire"></i>
-                        </div>
-                    </div>
-                    <h3>Hot Stone Therapy</h3>
-                    <p>Heated stones placed on key points to release tension and promote deep relaxation.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Hot Stone Therapy')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Aromatherapy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-flower"></i>
-                        </div>
-                    </div>
-                    <h3>Aromatherapy</h3>
-                    <p>Essential oils combined with massage for a holistic healing experience.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Aromatherapy')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Royal Jacuzzi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-water"></i>
-                        </div>
-                    </div>
-                    <h3>Royal Jacuzzi</h3>
-                    <p>Luxurious hydrotherapy experience for ultimate relaxation.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Royal Jacuzzi')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Body Polishing" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-gem"></i>
-                        </div>
-                    </div>
-                    <h3>Body Polishing</h3>
-                    <p>Full-body exfoliation to remove dead skin cells and reveal glowing skin.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Body Polishing')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Candle Therapy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="service-icon-fallback" style="display: none;">
-                            <i class="fas fa-candle"></i>
-                        </div>
-                    </div>
-                    <h3>Candle Therapy</h3>
-                    <p>Unique massage experience using specially crafted therapeutic candles.</p>
-                    <div class="service-buttons">
-                        <button class="service-btn service-btn-call" onclick="callNow()">
-                            <i class="fas fa-phone"></i> Call Now
-                        </button>
-                        <button class="service-btn service-btn-book" onclick="openWhatsApp('Candle Therapy')">
-                            <i class="fab fa-whatsapp"></i> Book Now
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// Close mobile menu when clicking on a link
+document.querySelectorAll('.nav-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+    });
+});
 
-    <!-- Booking Section -->
-    <section id="booking" class="booking">
-        <div class="container">
-            <div class="booking-wrapper">
-                <div class="booking-info">
-                    <p class="booking-subtitle">WHAT ARE YOU WAITING FOR...</p>
-                    <h2 class="booking-title">Make an Appointment</h2>
-                    <p class="booking-description">Experience exclusive benefits with our luxurious spa and wellness memberships. Book your appointment today and transform your wellness journey.</p>
-                    <div class="info-divider"></div>
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>OUR LOCATION</h4>
-                                <p>Flora Thai Spa, Gachibowli, Hyderabad</p>
-                                <p><a class="map-link" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">View directions on Google Maps</a></p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>OPENING HOURS</h4>
-                                <p>All Day 9:30 AM - 9:30 PM</p>
-                            </div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="info-content">
-                                <h4>CONTACT</h4>
-                                <p><a href="tel:+917829977969">+91 78299 77969</a></p>
-                                <p><a href="https://wa.me/919187079284" target="_blank" rel="noopener">+91 91870 79284 (WhatsApp)</a></p>
-                                <p>hello@florathaispa.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="booking-form-container">
-                    <form id="bookingForm" class="booking-form">
-                        <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email (Optional)</label>
-                            <input type="email" id="email" name="email" placeholder="Enter your email address">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Select Service *</label>
-                            <select id="service" name="service" required>
-                                <option value="">Choose a service</option>
-                                <option value="Swedish Massage">Swedish Massage</option>
-                                <option value="Hot Stone Therapy">Hot Stone Therapy</option>
-                                <option value="Aromatherapy">Aromatherapy</option>
-                                <option value="Royal Jacuzzi">Royal Jacuzzi</option>
-                                <option value="Body Polishing">Body Polishing</option>
-                                <option value="Candle Therapy">Candle Therapy</option>
-                                <option value="Full Body Massage">Full Body Massage</option>
-                                <option value="Facial Treatment">Facial Treatment</option>
-                                <option value="Thai Body Massage">Thai Body Massage</option>
-                                <option value="Balinese Body Massage">Balinese Body Massage</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Preferred Date *</label>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">Preferred Time *</label>
-                            <input type="time" id="time" name="time" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Additional Notes (Optional)</label>
-                            <textarea id="message" name="message" rows="3" placeholder="Any special requests or notes..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">BOOK APPOINTMENT</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+// Smooth Scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
 
-    <!-- Location Section -->
-    <section class="location-section" aria-labelledby="location-heading">
-        <div class="container">
-            <div class="section-header">
-                <p class="section-subtitle">VISIT US</p>
-                <h2 id="location-heading" class="section-title">Find Flora Thai Spa</h2>
-                <p class="section-description">Located in the heart of Gachibowli, Hyderabad. Tap below to open directions or explore guest reviews.</p>
-            </div>
-            <div class="location-grid">
-                <div class="map-card">
-                    <iframe
-                        title="Map directions to Flora Thai Spa"
-                        src="https://maps.google.com/maps?q=Flora%20Thai%20Spa%20Gachibowli&output=embed"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-                <div class="rating-card">
-                    <div class="rating-score">
-                        <span class="rating-value">4.9</span>
-                        <div class="rating-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="rating-label">Guest rating on Google Maps</p>
-                    </div>
-                    <p class="rating-description">Our guests love the serene ambience, luxury suites, and Thai-inspired therapies. Read recent experiences or drop your own review.</p>
-                    <div class="rating-actions">
-                        <a class="map-link primary" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">Open in Google Maps</a>
-                        <a class="map-link secondary" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">Read &amp; rate us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+// Scroll to Top Button
+const scrollTopBtn = document.querySelector('.scroll-top');
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Spa Gallery</h2>
-                <p class="section-description">Take a glimpse into our serene and luxurious environment</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-1.jpg" alt="Private therapy room at Flora Thai Spa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-2.jpg" alt="Dual treatment suite with jacuzzi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-water"></i>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-3.jpg" alt="Couple therapy room ambience" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-couch"></i>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-4.jpg" alt="Luxury suite with private jacuzzi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-5.jpg" alt="Relaxation area with bespoke seating" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-candle"></i>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="assets/images/flora-thai-spa-gallery-6.jpg" alt="Reception at Flora Thai Spa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="gallery-placeholder" style="display: none;">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollTopBtn.classList.add('show');
+    } else {
+        scrollTopBtn.classList.remove('show');
+    }
+});
 
-    <!-- Footer -->
-    <footer id="contact" class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column footer-branding">
-                    <div class="footer-logo">
-                        <img src="./assets/images/flora-thai-spa-logo.png" alt="Flora Thai Spa logo">
-                        <span>Flora Thai Spa</span>
-                    </div>
-                    <p>Transform your wellness journey at Flora Thai Spa. Our serene environment, skilled therapists, and luxurious treatments are designed to provide you with the ultimate Thai wellness experience.</p>
-                </div>
-                <div class="footer-column footer-services">
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Luxury Spa</a></li>
-                        <li><a href="#services">Stone Therapy</a></li>
-                        <li><a href="#services">Aroma Therapy</a></li>
-                        <li><a href="#services">Royal Jacuzzi</a></li>
-                        <li><a href="#services">Massage</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column footer-contact">
-                    <h4>Get in Touch</h4>
-                    <ul class="contact-list">
-                        <li><i class="fas fa-map-marker-alt"></i> Flora Thai Spa, Gachibowli, Hyderabad</li>
-                        <li><i class="fas fa-phone"></i> +91 78299 77969</li>
-                        <li><i class="fas fa-envelope"></i> hello@florathaispa.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>Copyright © 2025 florathaispa.com. Powered by Flora Thai Spa.</p>
-                <div class="social-icons">
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
 
-    <!-- Floating Action Buttons -->
-    <div class="floating-buttons">
-        <a href="tel:+917829977969" class="floating-btn call-btn" title="Call Now">
-            <i class="fas fa-phone"></i>
-            <span>Call Now</span>
-        </a>
-        <a href="https://wa.me/919187079284" class="floating-btn whatsapp-btn" target="_blank" title="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-    </div>
+// Scroll to Booking Section
+function scrollToBooking() {
+    const bookingSection = document.getElementById('booking');
+    if (bookingSection) {
+        bookingSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" onclick="scrollToTop()">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+// Contact Numbers
+const CALL_NUMBER = '+917829977969';
+const WHATSAPP_NUMBER = '919187079284'; // Format: country code + number (no + or spaces)
 
-    <!-- Confirmation Modal -->
-    <div id="confirmationModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Confirm Your Appointment</h2>
-                <button class="modal-close" onclick="closeConfirmationModal()">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p class="modal-subtitle">Please review your booking details:</p>
-                <div class="confirmation-details">
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-user"></i> Name:</span>
-                        <span class="detail-value" id="confirmName"></span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-phone"></i> Phone:</span>
-                        <span class="detail-value" id="confirmPhone"></span>
-                    </div>
-                    <div class="detail-item" id="confirmEmailItem" style="display: none;">
-                        <span class="detail-label"><i class="fas fa-envelope"></i> Email:</span>
-                        <span class="detail-value" id="confirmEmail"></span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-spa"></i> Service:</span>
-                        <span class="detail-value" id="confirmService"></span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-calendar"></i> Date:</span>
-                        <span class="detail-value" id="confirmDate"></span>
-                    </div>
-                    <div class="detail-item">
-                        <span class="detail-label"><i class="fas fa-clock"></i> Time:</span>
-                        <span class="detail-value" id="confirmTime"></span>
-                    </div>
-                    <div class="detail-item" id="confirmMessageItem" style="display: none;">
-                        <span class="detail-label"><i class="fas fa-comment"></i> Notes:</span>
-                        <span class="detail-value" id="confirmMessage"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-call" onclick="callNow()">
-                    <i class="fas fa-phone"></i> Call Now
-                </button>
-                <button class="btn-cancel" onclick="closeConfirmationModal()">Cancel</button>
-                <button class="btn-confirm" onclick="confirmBooking()">
-                    <i class="fab fa-whatsapp"></i> Book Slot & Send to WhatsApp
-                </button>
-            </div>
-        </div>
-    </div>
+function openWhatsAppWithText(rawMessage = '') {
+    const encoded = rawMessage ? encodeURIComponent(rawMessage) : '';
+    const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let url = '';
+    if (isMobile) {
+        url = encoded
+            ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encoded}`
+            : `https://wa.me/${WHATSAPP_NUMBER}`;
+    } else {
+        const textParam = encoded ? `&text=${encoded}` : '';
+        url = `https://web.whatsapp.com/send?phone=${WHATSAPP_NUMBER}${textParam}`;
+    }
 
-    <script src="script.js"></script>
-</body>
-</html>
+    const win = window.open(url, '_blank');
+    if (!win) {
+        window.location.href = url;
+    }
+}
+
+// Function to open WhatsApp with pre-filled message
+function openWhatsApp(serviceName = '') {
+    let message = '';
+    
+    if (serviceName) {
+        message = `Hello! I'm interested in booking ${serviceName}. Please let me know about availability.`;
+    } else {
+        message = 'Hello! I would like to book an appointment. Please let me know about availability.';
+    }
+    
+    openWhatsAppWithText(message);
+}
+
+// Store booking data temporarily for confirmation
+let pendingBookingData = null;
+
+// Function to send booking details to WhatsApp
+function sendBookingToWhatsApp(bookingData) {
+    const {
+        name,
+        phone,
+        email,
+        service,
+        date,
+        time,
+        message
+    } = bookingData;
+
+    // Format the booking message
+    let bookingMessage = `*New Appointment Booking Request - Flora Thai Spa*\n\n`;
+    bookingMessage += `*👤 Name:* ${name}\n`;
+    bookingMessage += `*📱 Phone:* ${phone}\n`;
+    
+    if (email && email.trim()) {
+        bookingMessage += `*📧 Email:* ${email}\n`;
+    }
+    
+    bookingMessage += `*💆 Service:* ${service || 'Not specified'}\n`;
+    bookingMessage += `*📅 Preferred Date:* ${formatDate(date)}\n`;
+    bookingMessage += `*⏰ Preferred Time:* ${formatTime(time)}\n`;
+    
+    if (message && message.trim()) {
+        bookingMessage += `*📝 Additional Notes:* ${message}\n`;
+    }
+    
+    bookingMessage += `\nPlease confirm this appointment slot. Thank you!`;
+
+    // Encode the message for URL
+    openWhatsAppWithText(bookingMessage);
+    
+    return true;
+}
+
+// Show confirmation modal
+function showConfirmationModal(bookingData) {
+    pendingBookingData = bookingData;
+    
+    // Populate confirmation modal
+    document.getElementById('confirmName').textContent = bookingData.name;
+    document.getElementById('confirmPhone').textContent = bookingData.phone;
+    document.getElementById('confirmDate').textContent = formatDate(bookingData.date);
+    document.getElementById('confirmTime').textContent = formatTime(bookingData.time);
+    document.getElementById('confirmService').textContent = bookingData.service || 'Not selected';
+    
+    // Show/hide email if provided
+    if (bookingData.email && bookingData.email.trim()) {
+        document.getElementById('confirmEmail').textContent = bookingData.email;
+        document.getElementById('confirmEmailItem').style.display = 'flex';
+    } else {
+        document.getElementById('confirmEmailItem').style.display = 'none';
+    }
+    
+    // Show/hide message if provided
+    if (bookingData.message && bookingData.message.trim()) {
+        document.getElementById('confirmMessage').textContent = bookingData.message;
+        document.getElementById('confirmMessageItem').style.display = 'flex';
+    } else {
+        document.getElementById('confirmMessageItem').style.display = 'none';
+    }
+    
+    // Show modal
+    const modal = document.getElementById('confirmationModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close confirmation modal
+function closeConfirmationModal() {
+    const modal = document.getElementById('confirmationModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    pendingBookingData = null;
+}
+
+// Confirm booking and send to WhatsApp
+function confirmBooking() {
+    if (pendingBookingData) {
+        sendBookingToWhatsApp(pendingBookingData);
+        closeConfirmationModal();
+        
+        // Reset form
+        const bookingForm = document.getElementById('bookingForm');
+        if (bookingForm) {
+            bookingForm.reset();
+        }
+        
+        // Show success message
+        setTimeout(() => {
+            alert('Your booking request has been sent to WhatsApp! Please complete the booking there.');
+        }, 500);
+    }
+}
+
+// Format date for display
+function formatDate(dateString) {
+    if (!dateString) return 'Not specified';
+    const date = new Date(dateString);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+}
+
+// Format time for display
+function formatTime(timeString) {
+    if (!timeString) return 'Not specified';
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minutes} ${ampm}`;
+}
+
+// Booking Form Handler
+const bookingForm = document.getElementById('bookingForm');
+
+if (bookingForm) {
+    bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = {
+            name: document.getElementById('name').value.trim(),
+            phone: document.getElementById('phone').value.trim(),
+            email: document.getElementById('email').value.trim(),
+            service: document.getElementById('service').value,
+            date: document.getElementById('date').value,
+            time: document.getElementById('time').value,
+            message: document.getElementById('message').value.trim()
+        };
+
+        // Validate form
+        if (!formData.name || !formData.phone || !formData.service || !formData.date || !formData.time) {
+            alert('Please fill in all required fields (Name, Phone, Service, Date, and Time).');
+            return;
+        }
+        
+        // Validate email if provided
+        if (formData.email && formData.email.trim()) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+        }
+
+        // Validate phone number (basic validation)
+        const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+        if (!phoneRegex.test(formData.phone)) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+
+        // Validate date (should not be in the past)
+        const selectedDate = new Date(formData.date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        if (selectedDate < today) {
+            alert('Please select a future date.');
+            return;
+        }
+
+        // Show confirmation modal
+        showConfirmationModal(formData);
+    });
+}
+
+// Set minimum date to today for date input
+const dateInput = document.getElementById('date');
+if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.setAttribute('min', today);
+}
+
+// Call Now Functionality
+function callNow() {
+    window.location.href = `tel:${CALL_NUMBER}`;
+}
+
+// Update phone numbers in the code
+// You can update these values to match your actual contact information
+function updateContactInfo() {
+    // Update phone number in floating buttons
+    const callBtn = document.querySelector('.call-btn');
+    if (callBtn) {
+        callBtn.href = `tel:${CALL_NUMBER}`;
+    }
+
+    // Update WhatsApp button
+    const whatsappBtn = document.querySelector('.whatsapp-btn');
+    if (whatsappBtn) {
+        whatsappBtn.href = `https://wa.me/${WHATSAPP_NUMBER}`;
+        whatsappBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            openWhatsApp();
+        });
+    }
+}
+
+// Initialize contact info on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateContactInfo();
+    
+    // Add animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.service-card, .feature-card, .gallery-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// Navbar scroll effect
+let lastScroll = 0;
+const navbar = document.querySelector('.navbar');
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        return;
+    }
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+        // Scrolling down
+        navbar.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        navbar.style.transform = 'translateY(0)';
+    }
+    
+    navbar.style.boxShadow = currentScroll > 50 ? '0 5px 20px rgba(0, 0, 0, 0.15)' : '0 2px 10px rgba(0, 0, 0, 0.1)';
+    lastScroll = currentScroll;
+});
+
+// Close modal when clicking outside
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('confirmationModal');
+    if (event.target === modal) {
+        closeConfirmationModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeConfirmationModal();
+    }
+});
+
+// Form validation feedback
+const formInputs = document.querySelectorAll('.booking-form input, .booking-form select, .booking-form textarea');
+
+formInputs.forEach(input => {
+    input.addEventListener('blur', function() {
+        if (this.hasAttribute('required') && !this.value.trim()) {
+            this.style.borderColor = '#e74c3c';
+        } else {
+            this.style.borderColor = '#ddd';
+        }
+    });
+
+    input.addEventListener('input', function() {
+        if (this.style.borderColor === 'rgb(231, 76, 60)') {
+            this.style.borderColor = '#ddd';
+        }
+    });
+});
 
