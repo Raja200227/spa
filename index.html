@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flora Spa - Luxury Wellness & Relaxation</title>
+    <title>Flora Thai Spa - Luxury Wellness & Relaxation</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -13,8 +13,11 @@
         <div class="container">
             <div class="nav-wrapper">
                 <div class="logo">
-                    <i class="fas fa-spa"></i>
-                    <span>Flora Spa</span>
+                    <img src="./assets/images/flora-thai-spa-logo.png" alt="Flora Thai Spa logo" class="logo-image">
+                    <div class="logo-text">
+                        <span class="logo-title">Flora Thai Spa</span>
+                        <span class="logo-subtitle">Luxury Thai Wellness</span>
+                    </div>
                 </div>
                 <ul class="nav-menu">
                     <li><a href="#home">Home</a></li>
@@ -48,9 +51,9 @@
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <p class="hero-subtitle">WELCOME TO FLORA SPA</p>
-            <h1 class="hero-title">Rejuvenate Your Body & Soul</h1>
-            <p class="hero-description">Transform your wellness journey at Flora Spa. Our serene environment, skilled therapists, and luxurious treatments are designed to provide you with the ultimate spa experience.</p>
+            <p class="hero-subtitle">WELCOME TO FLORA THAI SPA</p>
+            <h1 class="hero-title">Authentic Thai Wellness Retreat</h1>
+            <p class="hero-description">Step inside Flora Thai Spa and unwind in our beautifully curated interiors, featuring private suites, jacuzzi rooms, and tranquil therapy zones inspired by Thai luxury.</p>
             <button class="cta-button" onclick="scrollToBooking()">BOOK APPOINTMENT</button>
         </div>
     </section>
@@ -60,7 +63,7 @@
         <div class="container">
             <div class="section-header">
                 <p class="section-subtitle">EXPERTISE AREAS</p>
-                <h2 class="section-title">Discover the epitome of relaxation and rejuvenation at Flora Spa</h2>
+                <h2 class="section-title">Discover the epitome of relaxation and rejuvenation at Flora Thai Spa</h2>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
@@ -224,7 +227,8 @@
                             </div>
                             <div class="info-content">
                                 <h4>OUR LOCATION</h4>
-                                <p>123 Wellness Street, Spa District, City 12345</p>
+                                <p>Flora Thai Spa, Gachibowli, Hyderabad</p>
+                                <p><a class="map-link" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">View directions on Google Maps</a></p>
                             </div>
                         </div>
                         <div class="info-item">
@@ -242,8 +246,9 @@
                             </div>
                             <div class="info-content">
                                 <h4>CONTACT</h4>
-                                <p>+91 9989754001</p>
-                                <p>info@floraspa.com</p>
+                                <p><a href="tel:+917829977969">+91 78299 77969</a></p>
+                                <p><a href="https://wa.me/919187079284" target="_blank" rel="noopener">+91 91870 79284 (WhatsApp)</a></p>
+                                <p>hello@florathaispa.com</p>
                             </div>
                         </div>
                     </div>
@@ -297,6 +302,45 @@
         </div>
     </section>
 
+    <!-- Location Section -->
+    <section class="location-section" aria-labelledby="location-heading">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">VISIT US</p>
+                <h2 id="location-heading" class="section-title">Find Flora Thai Spa</h2>
+                <p class="section-description">Located in the heart of Gachibowli, Hyderabad. Tap below to open directions or explore guest reviews.</p>
+            </div>
+            <div class="location-grid">
+                <div class="map-card">
+                    <iframe
+                        title="Map directions to Flora Thai Spa"
+                        src="https://maps.google.com/maps?q=Flora%20Thai%20Spa%20Gachibowli&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="rating-card">
+                    <div class="rating-score">
+                        <span class="rating-value">4.9</span>
+                        <div class="rating-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="rating-label">Guest rating on Google Maps</p>
+                    </div>
+                    <p class="rating-description">Our guests love the serene ambience, luxury suites, and Thai-inspired therapies. Read recent experiences or drop your own review.</p>
+                    <div class="rating-actions">
+                        <a class="map-link primary" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">Open in Google Maps</a>
+                        <a class="map-link secondary" href="https://maps.app.goo.gl/MWsL1pDusFmGySMB8?g_st=ipc" target="_blank" rel="noopener">Read &amp; rate us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Gallery Section -->
     <section id="gallery" class="gallery">
         <div class="container">
@@ -306,37 +350,37 @@
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa Treatment Room" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-1.jpg" alt="Private therapy room at Flora Thai Spa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-spa"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa Relaxation Area" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-2.jpg" alt="Dual treatment suite with jacuzzi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-water"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Spa Lounge" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-3.jpg" alt="Couple therapy room ambience" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-couch"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Aromatherapy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-4.jpg" alt="Luxury suite with private jacuzzi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-leaf"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Candle Therapy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-5.jpg" alt="Relaxation area with bespoke seating" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-candle"></i>
                     </div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Luxury Spa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img src="assets/images/flora-thai-spa-gallery-6.jpg" alt="Reception at Flora Thai Spa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="gallery-placeholder" style="display: none;">
                         <i class="fas fa-gem"></i>
                     </div>
@@ -349,14 +393,14 @@
     <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-column">
+                <div class="footer-column footer-branding">
                     <div class="footer-logo">
-                        <i class="fas fa-spa"></i>
-                        <span>Flora Spa</span>
+                        <img src="./assets/images/flora-thai-spa-logo.png" alt="Flora Thai Spa logo">
+                        <span>Flora Thai Spa</span>
                     </div>
-                    <p>Transform your wellness journey at Flora Spa. Our serene environment, skilled therapists, and luxurious treatments are designed to provide you with the ultimate spa experience.</p>
+                    <p>Transform your wellness journey at Flora Thai Spa. Our serene environment, skilled therapists, and luxurious treatments are designed to provide you with the ultimate Thai wellness experience.</p>
                 </div>
-                <div class="footer-column">
+                <div class="footer-column footer-services">
                     <h4>Services</h4>
                     <ul>
                         <li><a href="#services">Luxury Spa</a></li>
@@ -366,17 +410,17 @@
                         <li><a href="#services">Massage</a></li>
                     </ul>
                 </div>
-                <div class="footer-column">
+                <div class="footer-column footer-contact">
                     <h4>Get in Touch</h4>
                     <ul class="contact-list">
-                        <li><i class="fas fa-map-marker-alt"></i> 123 Wellness Street, Spa District, City 12345</li>
-                        <li><i class="fas fa-phone"></i> +91 9989754001</li>
-                        <li><i class="fas fa-envelope"></i> info@floraspa.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Flora Thai Spa, Gachibowli, Hyderabad</li>
+                        <li><i class="fas fa-phone"></i> +91 78299 77969</li>
+                        <li><i class="fas fa-envelope"></i> hello@florathaispa.com</li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>Copyright © 2025 floraspa.com. Powered by floraspa.com.</p>
+                <p>Copyright © 2025 florathaispa.com. Powered by Flora Thai Spa.</p>
                 <div class="social-icons">
                     <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
@@ -388,11 +432,11 @@
 
     <!-- Floating Action Buttons -->
     <div class="floating-buttons">
-        <a href="tel:+919989754001" class="floating-btn call-btn" title="Call Now">
+        <a href="tel:+917829977969" class="floating-btn call-btn" title="Call Now">
             <i class="fas fa-phone"></i>
             <span>Call Now</span>
         </a>
-        <a href="https://wa.me/919989754001" class="floating-btn whatsapp-btn" target="_blank" title="WhatsApp">
+        <a href="https://wa.me/919187079284" class="floating-btn whatsapp-btn" target="_blank" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
     </div>
