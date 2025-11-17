@@ -1,7 +1,7 @@
 {
   "name": "flora-spa",
   "version": "1.0.0",
-  "description": "Flora Spa - Luxury Wellness & Relaxation Website",
+  "description": "Flora Thai Spa - Luxury Wellness & Relaxation Website",
   "main": "index.html",
   "scripts": {
     "start": "echo 'Static site - no server needed'",
@@ -13,7 +13,7 @@
     "massage",
     "beauty"
   ],
-  "author": "Flora Spa",
+  "author": "Flora Thai Spa",
   "license": "MIT",
   "repository": {
     "type": "git",
