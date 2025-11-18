@@ -459,12 +459,3 @@ formInputs.forEach(input => {
     });
 });
 
-// Service card click handlers
-document.querySelectorAll('.service-btn').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const serviceName = this.closest('.service-card').querySelector('h3').textContent;
-        openWhatsApp(serviceName);
-    });
-});
-
